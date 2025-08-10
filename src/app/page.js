@@ -72,7 +72,7 @@ export default function Home() {
               Generate Shuffled Question Papers
             </h2>
             <p className="text-gray-600">
-              Search for a course and generate a new question paper by shuffling previous years' questions
+              Search for a course and generate a new question paper by shuffling previous years questions
             </p>
           </div>
 
