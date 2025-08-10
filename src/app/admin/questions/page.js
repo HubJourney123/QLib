@@ -12,29 +12,19 @@ export default function QuestionsPage() {
   const [showUploadForm, setShowUploadForm] = useState(false);
   const [jsonInput, setJsonInput] = useState('');
 
-  useEffect(() => {
-    fetchCourses();
-  }, []);
-
-  useEffect(() => {
-    if (selectedCourse) {
-      fetchPapers();
+const fetchCourses = async () => {
+  try {
+    const response = await fetch('/api/courses');
+    if (response.ok) {
+      const data = await response.json();
+      setCourses(data);
     }
-  }, [selectedCourse, fetchPapers]); // <— now both are in deps
+  } catch (error) {
+    toast.error('Failed to fetch courses');
+  }
+};
 
-  const fetchCourses = async () => {
-    try {
-      const response = await fetch('/api/courses');
-      if (response.ok) {
-        const data = await response.json();
-        setCourses(data);
-      }
-    } catch (error) {
-      toast.error('Failed to fetch courses');
-    }
-  };
-
-  const fetchPapers = useCallback(async () => {
+const fetchPapers = useCallback(async () => {
   try {
     const response = await fetch(`/api/questions?courseId=${selectedCourse.id}`);
     if (response.ok) {
@@ -56,7 +46,18 @@ export default function QuestionsPage() {
   } catch (error) {
     toast.error('Failed to fetch papers');
   }
-}, [selectedCourse]); // <— dependency
+}, [selectedCourse]);
+
+useEffect(() => {
+  fetchCourses();
+}, []);
+
+useEffect(() => {
+  if (selectedCourse) {
+    fetchPapers();
+  }
+}, [selectedCourse, fetchPapers]);
+
 
   const handleUpload = async () => {
     try {
