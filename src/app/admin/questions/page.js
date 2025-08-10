@@ -20,7 +20,7 @@ export default function QuestionsPage() {
     if (selectedCourse) {
       fetchPapers();
     }
-  }, [selectedCourse]);
+  }, [selectedCourse, fetchPapers]); // <— now both are in deps
 
   const fetchCourses = async () => {
     try {
@@ -34,29 +34,29 @@ export default function QuestionsPage() {
     }
   };
 
-  const fetchPapers = async () => {
-    try {
-      const response = await fetch(`/api/questions?courseId=${selectedCourse.id}`);
-      if (response.ok) {
-        const questions = await response.json();
-        // Group questions by paper
-        const papersMap = {};
-        questions.forEach(q => {
-          const paperId = q.questionPaper.id;
-          if (!papersMap[paperId]) {
-            papersMap[paperId] = {
-              ...q.questionPaper,
-              questions: []
-            };
-          }
-          papersMap[paperId].questions.push(q);
-        });
-        setPapers(Object.values(papersMap));
-      }
-    } catch (error) {
-      toast.error('Failed to fetch papers');
+  const fetchPapers = useCallback(async () => {
+  try {
+    const response = await fetch(`/api/questions?courseId=${selectedCourse.id}`);
+    if (response.ok) {
+      const questions = await response.json();
+      // Group questions by paper
+      const papersMap = {};
+      questions.forEach(q => {
+        const paperId = q.questionPaper.id;
+        if (!papersMap[paperId]) {
+          papersMap[paperId] = {
+            ...q.questionPaper,
+            questions: []
+          };
+        }
+        papersMap[paperId].questions.push(q);
+      });
+      setPapers(Object.values(papersMap));
     }
-  };
+  } catch (error) {
+    toast.error('Failed to fetch papers');
+  }
+}, [selectedCourse]); // <— dependency
 
   const handleUpload = async () => {
     try {
