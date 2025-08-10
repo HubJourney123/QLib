@@ -230,18 +230,19 @@ export default function QuestionsPage() {
                   <li>semester: Semester number</li>
                   <li>courseCode: Course code</li>
                   <li>courseTitle: Course title</li>
-                  <li>examType: "regular" or "backlog"</li>
+                  <li>examType: &quot;regular&quot; or &quot;backlog&quot;</li>
                   <li>questions: Array of question objects</li>
                 </ul>
-                <strong className="mt-2 block">Each question should have:</strong>
-                <ul className="mt-1 list-disc list-inside">
-                  <li>questionNumber: e.g., "1(a)", "1(b)", "2(a)"</li>
+               <strong className="mt-2 block">Each question should have:</strong>
+               <ul className="mt-1 list-disc list-inside">
+                  <li>questionNumber: e.g., &quot;1(a)&quot;, &quot;1(b)&quot;, &quot;2(a)&quot;</li>
                   <li>questionText: The actual question</li>
                   <li>marks: Number of marks (optional)</li>
-                  <li>tag: "definition", "mathematical problem", "theory", or "derivation"</li>
+                  <li>tag: &quot;definition&quot;, &quot;mathematical problem&quot;, &quot;theory&quot;, or &quot;derivation&quot;</li>
                   <li>topic: Topic name (optional)</li>
                 </ul>
               </div>
+
 
               <div className="flex gap-2 mt-4">
                 <button onClick={handleUpload} className="btn-primary">
