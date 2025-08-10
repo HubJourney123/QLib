@@ -10,31 +10,31 @@ export default function SearchCourse({ onCourseSelect }) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const debounceTimer = setTimeout(() => {
-      if (searchQuery.trim()) {
-        searchCourses();
-      } else {
-        setSearchResults([]);
-      }
-    }, 300);
-
-    return () => clearTimeout(debounceTimer);
-  }, [searchQuery]);
-
-  const searchCourses = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(`/api/search?q=${encodeURIComponent(searchQuery)}`);
-      if (response.ok) {
-        const data = await response.json();
-        setSearchResults(data);
-      }
-    } catch (error) {
-      console.error('Search failed:', error);
-    } finally {
-      setLoading(false);
+  const debounceTimer = setTimeout(() => {
+    if (searchQuery.trim()) {
+      const searchCourses = async () => {
+        setLoading(true);
+        try {
+          const response = await fetch(`/api/search?q=${encodeURIComponent(searchQuery)}`);
+          if (response.ok) {
+            const data = await response.json();
+            setSearchResults(data);
+          }
+        } catch (error) {
+          console.error('Search failed:', error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      searchCourses();
+    } else {
+      setSearchResults([]);
     }
-  };
+  }, 300);
+
+  return () => clearTimeout(debounceTimer);
+}, [searchQuery]);
+
 
   return (
     <div className="relative">
