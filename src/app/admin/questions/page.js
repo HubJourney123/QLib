@@ -1,7 +1,7 @@
 // app/admin/questions/page.js
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import toast from 'react-hot-toast';
 import { FiUpload, FiFileText, FiTrash2, FiDownload } from 'react-icons/fi';
 
