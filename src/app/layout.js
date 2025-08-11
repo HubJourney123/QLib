@@ -1,4 +1,5 @@
 // src/app/layout.js - Root layout with Toaster
+import 'katex/dist/katex.min.css';  // Add this line at the top
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Toaster } from 'react-hot-toast';
