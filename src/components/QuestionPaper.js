@@ -119,7 +119,7 @@ export default function QuestionPaper({ paper }) {
             {groupedQuestions[mainNumber].map(question => (
               <div 
                 key={question.id || question.questionNumber} 
-                className="ml-4 p-3 bg-gray-50 rounded-lg border-l-4 border-orange-200"
+                className="ml-4 p-3 bg-gray-50 rounded-lg border-l-4 border-orange-100"
               >
                 <div className="flex justify-between items-start gap-4">
                   <div className="flex-1 min-w-0">
